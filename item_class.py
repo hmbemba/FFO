@@ -52,23 +52,44 @@ class item:
         return Path(path).parent
     
     @staticmethod
-    def mkdir(dirName, inputPath: Path) -> None:
-        if item.isFolder(inputPath):
-            path = Path(inputPath) / dirName
+    def mkdir(dirName:str, dst: Path) -> None:
+        if item.isFolder(dst):
+            path = Path(dst) / dirName
             if item.FolderExists(path):
                 raise errors.DirectoryAlreadyExistsError(path, "This directory already exists")
             else:
                 Path.mkdir(path)
         
-        if item.isFile(inputPath):
-            path = item.parent(inputPath) / dirName
+        if item.isFile(dst):
+            path = item.parent(dst) / dirName
             if item.FolderExists(path):
                 raise errors.DirectoryAlreadyExistsError(path, "This directory already exists")
             else:
                 Path.mkdir(path)
     
     @staticmethod
+    def mkfileOverwrite(fileNameWithExt:str, dst: Path, content:str = '') -> None:
+        path = f"{dst}\{fileNameWithExt}"
+        with open(path, 'w') as f:
+            f.write(content)
+
+    @staticmethod
+    def mkfileNoOverwrite(fileNameWithExt:str, dst: Path, content:str = '') -> None:
+        '''
+        Creates a new file, UNLESS that file already exists then it will raise an error
+        '''
+        path = f"{dst}\{fileNameWithExt}"
+        if item.FileExists(path):
+            raise Exception("This file already exists. To overwrite it use mkfileOverwrite")
+        else:
+            with open(path, 'w') as f:
+                f.write(content)
+    
+    @staticmethod
     def getSize(_path: Path) -> dict:
+        '''
+        Gets the size of a file or folder
+        '''
         if item.isFolder(_path):
             sizeInBytes =  float( sum(f.stat().st_size for f in Path(_path).glob('**/*') if f.is_file()) )
             sizeInKb = sizeInBytes * 0.001
