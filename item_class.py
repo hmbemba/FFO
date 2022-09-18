@@ -28,6 +28,9 @@ class item:
         else:
             return item.isFolder(_path)
     
+    '''Alias for semantic Reasons'''
+    FolderExistsOrError = isFolderOrError
+    
     
     '''-----------------FILE FUNCTIONS---------------------'''   
     @staticmethod
@@ -43,6 +46,9 @@ class item:
             raise errors.NotAFileError(_path, "This is not a valid path to a file")
         else:
             return item.isFile(_path)
+    
+    '''Alias for semantic Reasons'''
+    FileExistsOrError = isFileOrError
         
         
     '''-----------------UTIL FUNCTIONS---------------------'''
@@ -69,6 +75,10 @@ class item:
     
     @staticmethod
     def mkfileOverwrite(fileNameWithExt:str, dst: Path, content:str = '') -> None:
+        '''
+        Creates a new file if it doesn't exist
+        Overwrites it if it does
+        '''
         path = f"{dst}\{fileNameWithExt}"
         with open(path, 'w') as f:
             f.write(content)
