@@ -79,7 +79,7 @@ class item:
         Creates a new file if it doesn't exist
         Overwrites it if it does
         '''
-        path = f"{dst}\{fileNameWithExt}"
+        path = f"{dst}\\{fileNameWithExt}"
         with open(path, 'w') as f:
             f.write(content)
 
@@ -88,7 +88,7 @@ class item:
         '''
         Creates a new file, UNLESS that file already exists then it will raise an error
         '''
-        path = f"{dst}\{fileNameWithExt}"
+        path = f"{dst}\\{fileNameWithExt}"
         if item.FileExists(path):
             raise Exception("This file already exists. To overwrite it use mkfileOverwrite")
         else:
