@@ -143,16 +143,28 @@ class item:
         return {s.lower():True for s in suffixes}.get(pathEnding.lower(), False)
     
     def is_videoFile(pathEnding: str) -> bool:
+        '''
+        Make sure you pass in a Path object with the .suffix like so!
+        item.is_videoFile(file.suffix)
+        '''
         pathEnding = pathEnding.lower()
         allowedSuffixes = ['.mov', '.mp4', '.mpeg', '.mpg', '.flv']
         return {s.lower():True for s in allowedSuffixes}.get(pathEnding, False)
     
     def is_audioFile(pathEnding: str) -> bool:
+        '''
+        Make sure you pass in a Path object with the .suffix like so!
+        item.is_audioFile(file.suffix)
+        '''
         pathEnding = pathEnding.lower()
         allowedSuffixes = ['.mp3', '.wav', '.ogg', '.aac', '.flac']
         return {s.lower():True for s in allowedSuffixes}.get(pathEnding, False)
 
-    def is_imageFile(pathSuffix: str) -> bool:
+    def is_imageFile(pathSuffix: Path) -> bool:
+        '''
+        Make sure you pass in a Path object with the .suffix like so!
+        item.is_imageFile(file.suffix)
+        '''
         pathSuffix = pathSuffix.lower()
         allowedSuffixes = ['.png', '.jpeg', 'tiff', '.jpg','.ping']
         return {s.lower():True for s in allowedSuffixes}.get(pathSuffix, False)
