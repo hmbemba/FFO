@@ -74,7 +74,7 @@ class item:
                 Path.mkdir(path)
     
     @staticmethod
-    def mkfileOverwrite(fileNameWithExt:str, dst: Path, content:str = '') -> None:
+    def mkfileOverwrite(fileNameWithExt:str, dst: Path = '.', content:str = '') -> None:
         '''
         Creates a new file if it doesn't exist
         Overwrites it if it does
@@ -84,7 +84,7 @@ class item:
             f.write(content)
 
     @staticmethod
-    def mkfileNoOverwrite(fileNameWithExt:str, dst: Path, content:str = '') -> None:
+    def mkfileNoOverwrite(fileNameWithExt:str, dst: Path = '.', content:str = '') -> None:
         '''
         Creates a new file, UNLESS that file already exists then it will raise an error
         '''
