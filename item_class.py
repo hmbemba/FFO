@@ -59,6 +59,9 @@ class item:
     
     @staticmethod
     def mkdir(dirName:str, dst: Path) -> None:
+        '''
+        item.mkdir(dirName = '...', dst= '...')
+        '''
         if item.isFolder(dst):
             path = Path(dst) / dirName
             if item.FolderExists(path):
